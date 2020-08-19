@@ -9,6 +9,51 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
+<body>
+  {% load static %}
+  <style>
+    .btn-like{
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: url({% static 'images/instagramicon.png' %});
+      background-position: -525px -250px;
+      text-indent: -9999px;
+      overflow:hidden;
+      border:none;
+    }
+    .btn-like.activate{
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: url({% static 'images/instagramicon.png' %});
+      background-position: -525px -200px;
+      text-indent: -9999px;
+      overflow:hidden;
+      border:none;
+    }
+    .btn-favorite{
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: url({% static 'images/instagramicon.png' %});
+      background-position: -200px -546px;
+      text-indent: -9999px;
+      overflow:hidden;
+      border:none;
+    }
+    .btn-favorite.activate{
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: url({% static 'images/instagramicon.png' %});
+      background-position: -100px -546px;
+      text-indent: -9999px;
+      overflow:hidden;
+      border:none;
+    }
+
+  </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">estagram</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +84,20 @@
     </form>
   </div>
 </nav>
+<div class="container">
+  {% if messages %}
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-6">
+        {% for message in messages %}
+          <div class="alert alert-{{message.tag}}">{{message}}</div>
+        {% endfor %}
+      </div>
+      <div class="col"></div>
+    </div>
+  {% endif %}
+</div>
+  
   {% block content %}
   
   {% endblock %}
