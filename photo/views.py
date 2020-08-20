@@ -98,3 +98,46 @@ class PhotoFavorite(View):
       referer_url = request.META.get('HTTP_REFERER')
       path = urlparse(referer_url).path
       return HttpResponseRedirect(path)
+
+
+class PhotoLikeList(ListView):
+  model = Photo
+  template_name = 'photo/photo_list.html'
+
+  def dispatch(self, request, *args, **kwargs):
+    if not request.user.is_authenticated:
+      messages.warning(request, '로그인후 가능해요')
+      return HttpResponseRedirect('/')
+    return super(PhotoLikeList, self).dispatch(request, *args, **kwargs)
+
+  def get_queryset(self):
+    user = self.request.user
+    queryset = user.like_post.all()
+    return queryset
+
+
+class PhotoFavoriteList(ListView):
+  model = Photo
+  template_name = 'photo/photo_list.html'
+
+  def dispatch(self, request, *args, **kwargs):
+    if not request.user.is_authenticated:
+      messages.warning(request, '로그인후 이용 가능해요')
+      return HttpResponseRedirect('/')
+    return super(PhotoFavoriteList, self).dispatch(request, *args, **kwargs)
+
+  def get_queryset(self):
+    user = self.request.user
+    queryset = user.favorite_post.all()
+    return queryset
+
+
+class PhotoMyList(ListView):
+  model = Photo
+  template_name = 'photo/photo_mylist.html'
+
+  def dispatch(self, request, *args, **kwargs):
+    if not request.user.is_authenticated:
+      messages.warning(request, '로그인후 이용 가능해요')
+      return HttpResponseRedirect('/')
+    return super(PhotoMyList, self).dispatch(request, *args, **kwargs)
