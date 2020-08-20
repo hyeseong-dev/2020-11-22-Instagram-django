@@ -4,4 +4,5 @@ django-disqus==0.5
 mock==4.0.2
 Pillow==7.2.0
 pytz==2020.1
+six==1.15.0
 sqlparse==0.3.1
